@@ -1,0 +1,30 @@
+list:
+  participants:
+    - "Jean/test@gmail.com"
+    - "Georges/test@gmail.com"
+    - "Clément/test@gmail.com"
+    - "Barbara/test@gmail.com"
+
+  exclusions:
+    - "Clément/Barbara"
+    - "Georges/Jean"
+
+mail:
+  smtp_server: smtp.gmail.com
+  smtp_port: 587
+  username: test@gmail.com
+  password: "password"
+
+  from: You <you@gmail.net>
+  subject: Tu es le secret santa de {receiver} !
+  message:
+    Cher {gifter},
+    
+    Cette année, tu es le secret santa de {receiver} ! Ho Ho Ho !
+
+    N'oublie pas ton cadeau ! :)
+
+    Joyeuses fêtes,
+
+    -- 
+    Papa Nowel
