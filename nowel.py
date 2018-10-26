@@ -1,7 +1,9 @@
 #!/usr/bin/env python3
 
+import datetime
 import os
 import random
+import smtplib
 import sys
 import yaml
 
@@ -43,9 +45,9 @@ def choose_pairings(participants, receivers):
 
         pairings.append({
             "gifter_name": gifter,
-            "gifter_email": participants[gifter]['mail'],
+            "gifter_mail": participants[gifter]['mail'],
             "receiver_name": receiver,
-            "receiver_email": participants[receiver]['mail']
+            "receiver_mail": participants[receiver]['mail']
         })
 
         del remaining_participants[gifter]
@@ -97,6 +99,36 @@ def send_emails(pairings, mail):
         return
 
     print("Sending emails...")
+
+    server = smtplib.SMTP(mail['smtp_server'], mail['smtp_port'])
+    server.starttls()
+    server.login(mail['username'], mail['password'])
+
+    for pair in pairings:
+        headers = {
+            'Content-Type': 'text/plain; charset=utf-8',
+            'Content-Disposition': 'inline',
+            'Content-Transfer-Encoding': '8bit',
+            'From': mail['from'],
+            'To': pair['gifter_mail'],
+            'Date': datetime.datetime.now().strftime('%a, %d %b %Y  %H:%M:%S %Z'),
+            'Subject': mail['subject'].format(gifter=pair['gifter_name'], receiver=pair['receiver_name'])
+        }
+        message = mail['message'].format(
+            gifter=pair['gifter_name'],
+            receiver=pair['receiver_name']
+        )
+
+        body = ''
+        for k, v in headers.items():
+            body += f"{k}: {v}\n"
+
+        body += f"\n{message}\n"
+
+        result = server.sendmail(headers['From'], headers['To'], body.encode('utf-8'))
+        print(f"Emailed {pair['gifter_name']} <{pair['gifter_mail']}>")
+
+    server.quit()
 
 if __name__ == "__main__":
     config = parse_config()
