@@ -10,6 +10,8 @@ list:
     - "Clément/Barbara"
     - "Georges/Jean"
 
+price_max: 20
+
 mail:
   smtp_server: smtp.gmail.com
   smtp_port: 587
@@ -20,10 +22,10 @@ mail:
   subject: Tu es le secret santa de {receiver} !
   message:
     Cher {gifter},
-    
+
     Cette année, tu es le secret santa de {receiver} ! Ho Ho Ho !
 
-    N'oublie pas ton cadeau ! :)
+    N'oublie pas ton cadeau d'une valeur maximale de {price_max}€ ! :)
 
     Joyeuses fêtes,
 

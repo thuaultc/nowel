@@ -84,11 +84,13 @@ def generate_pairings(list):
         except Exception as e:
             print("Trying pairings again...")
 
-def send_emails(pairings, mail):
+def send_emails(pairings, config):
+    mail = config['mail']
+
     for p in pairings:
         gifter = p['gifter_name']
         receiver = p['receiver_name']
-        
+
         print(f"\t{gifter} -> {receiver}")
 
     print("Send emails ? [y/N] ")
@@ -116,7 +118,8 @@ def send_emails(pairings, mail):
         }
         message = mail['message'].format(
             gifter=pair['gifter_name'],
-            receiver=pair['receiver_name']
+            receiver=pair['receiver_name'],
+            price_max=config['price_max']
         )
 
         body = ''
@@ -133,4 +136,4 @@ def send_emails(pairings, mail):
 if __name__ == "__main__":
     config = parse_config()
     pairings = generate_pairings(config['list'])
-    send_emails(pairings, config['mail'])
+    send_emails(pairings, config)
