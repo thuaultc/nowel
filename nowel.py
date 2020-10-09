@@ -93,13 +93,6 @@ def send_emails(pairings, config):
 
         print(f"\t{gifter} -> {receiver}")
 
-    print("Send emails ? [y/N] ")
-
-    choice = input().lower()
-
-    if choice != 'y':
-        return
-
     print("Sending emails...")
 
     server = smtplib.SMTP(mail['smtp_server'], mail['smtp_port'])
