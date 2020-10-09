@@ -19,4 +19,9 @@ pipenv install
 pipenv run ./nowel.py
 ```
 
-You'll get a random cyclic generation of gifters/receivers, followed by a prompt for sending confirmation.
+You'll get a random cyclic generation of gifters/receivers.
+
+## Authors
+
+* **Lucille Tachet** - [ltachet](https://github.com/ltachet)
+* **Clément Thuault** - [thuaultc](https://github.com/thuaultc)
