@@ -15,7 +15,7 @@ def parse_config():
 
     with open(config_path, 'r') as stream:
         try:
-            return yaml.load(stream)
+            return yaml.safe_load(stream)
         except Exception as e:
             print(f"Error while parsing config: {e}", file=sys.stderr)
 
